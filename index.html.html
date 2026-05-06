@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="slides-format" content="viewport">
+  <title>投诉引导手册 / Complaint Guidance Manual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-bg: #07131f;
+      --color-bg-deep: #020913;
+      --color-surface: #102235;
+      --color-text: #f3f7fb;
+      --color-text-secondary: #c7d5e2;
+      --color-text-muted: #7c95aa;
+      --color-accent-1: #d4af57;
+      --color-accent-2: #f5e6bf;
+      --color-accent-3: #2b6ea6;
+      --color-glass-bg: rgba(255,255,255,0.05);
+      --color-glass-border: rgba(212,175,87,0.18);
+      --color-vignette: rgba(0,0,0,0.5);
+      --font-display: 'Noto Serif SC', serif;
+      --font-body: 'Noto Sans SC', sans-serif;
+    }
+  </style>
+  <style>
+    :root { --color-bg:#07131f; --color-text:#f3f7fb; }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{margin:0;background:var(--color-bg)}
+    body{font-family:'Noto Sans SC',sans-serif;color:var(--color-text);overflow:hidden;width:100vw;height:100vh}
+    .deck{width:100vw;height:100vh;position:relative}
+    .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.95);transition:opacity .7s ease,transform .7s ease;pointer-events:none;overflow:hidden;background:var(--color-bg)}
+    .slide.active{opacity:1;transform:scale(1);pointer-events:all}
+    .slide>.content{position:relative;z-index:2;width:100%;max-width:1180px;padding:clamp(1.5rem,3vw,3.5rem);overflow:hidden}
+    .nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;background:rgba(7,19,31,.84);backdrop-filter:blur(10px);padding:10px 22px;border-radius:999px;border:1px solid rgba(212,175,87,.16)}
+    .nav-btn{width:40px;height:40px;border:none;border-radius:50%;background:rgba(212,175,87,.12);color:#d4af57;font-size:1.2rem;cursor:pointer}
+    .slide-dots{display:flex;gap:8px}.slide-dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(212,175,87,.22);cursor:pointer}.slide-dots .dot.active{background:#d4af57;transform:scale(1.25)}
+    .slide-counter{font-size:.8rem;color:#7c95aa;min-width:42px;text-align:center}
+    .reveal{opacity:0;transform:translateY(18px)}
+    .gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+    .blob{position:absolute;border-radius:50%;filter:blur(80px);animation:float-slow 12s ease-in-out infinite}
+    .blob:nth-child(2){animation:float-drift 16s ease-in-out infinite}.blob:nth-child(3){animation:float-slow 18s ease-in-out infinite reverse}
+    .slide::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px;opacity:.03;mix-blend-mode:overlay}
+    .slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.5) 100%)}
+    @keyframes float-slow{0%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-46px) scale(1.1)}50%{transform:translate(-36px,38px) scale(.92)}75%{transform:translate(44px,18px) scale(1.07)}100%{transform:translate(0,0) scale(1)}}
+    @keyframes float-drift{0%{transform:translate(0,0) scale(1) rotate(0)}33%{transform:translate(-52px,-56px) scale(1.13) rotate(3deg)}66%{transform:translate(38px,28px) scale(.9) rotate(-2deg)}100%{transform:translate(0,0) scale(1) rotate(0)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    .mouse-spotlight{position:fixed;inset:0;z-index:99;pointer-events:none}
+    .label{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:#d4af57}
+    .title-cn{font-family:'Noto Serif SC',serif;font-size:clamp(2.05rem,3.9vw,3rem);font-weight:900;line-height:1.15;color:#f3f7fb}
+    .title-en{font-size:.86rem;letter-spacing:.18em;text-transform:uppercase;color:#7c95aa;margin-top:.25rem}
+    .gold-rule{height:3px;width:180px;background:linear-gradient(90deg,#d4af57,transparent);border:none;margin:.95rem 0 1rem}
+    .glass-card{background:rgba(255,255,255,.045);backdrop-filter:blur(14px);border:1px solid rgba(212,175,87,.14);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.16)}
+    .hero-box{max-width:930px;margin:0 auto 1.3rem;padding:15px 18px;text-align:center}
+    .hero-main{font-size:clamp(2.8rem,6vw,4.7rem);font-weight:900;line-height:1.08;background:linear-gradient(135deg,#d4af57,#f5e6bf,#d4af57);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:.98rem;letter-spacing:.22em;text-transform:uppercase;color:#7c95aa;margin-top:.55rem}
+    .hero-note-cn{font-size:1.38rem;font-weight:900;line-height:1.55;color:#f3f7fb}
+    .hero-note-en{font-size:.95rem;line-height:1.8;color:#c7d5e2;margin-top:.55rem}
+    .dual-title{font-size:1rem;font-weight:900;color:#d4af57;line-height:1.55}.dual-sub{font-size:.88rem;color:#f3f7fb;line-height:1.6;margin-top:.35rem}
+    .big-cn{font-size:1.16rem;font-weight:900;line-height:1.55;color:#f3f7fb}.big-en{font-size:.82rem;line-height:1.72;color:#c7d5e2;margin-top:.18rem}
+    .meta-cn{font-size:.92rem;color:#f3f7fb;font-weight:700;line-height:1.55}.meta-en{font-size:.78rem;color:#7c95aa;line-height:1.65;margin-top:.12rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:stretch}
+    .info-block{padding:1.08rem 1.15rem}
+    .contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
+    .mini-card{border-radius:15px;border:1px solid rgba(212,175,87,.14);background:rgba(255,255,255,.04);padding:.9rem .95rem}
+    .bullet{display:flex;gap:9px;align-items:flex-start}.bullet span:first-child{color:#d4af57;font-weight:900;flex-shrink:0}
+    .timeline{display:flex;flex-direction:column;gap:.72rem;justify-content:center;height:100%}
+    .time-row{display:grid;grid-template-columns:155px 1fr;gap:12px;align-items:start}.time-key{font-size:.9rem;font-weight:900;color:#d4af57;word-break:break-word;line-height:1.4}.time-val{font-size:.86rem;color:#c7d5e2;line-height:1.65}
+    .result-good{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);border-radius:18px;padding:1.05rem 1.1rem}
+    .result-bad{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);border-radius:18px;padding:1.05rem 1.1rem}
+    .small-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem .9rem}
+    .foot-mini{font-size:.79rem;line-height:1.68;color:#7c95aa;display:flex;gap:7px}
+  </style>
+</head>
+<body>
+<div class="mouse-spotlight"></div>
+<div class="deck">
+  <div class="slide active" data-slide="1">
+    <div class="gradient-mesh">
+      <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#d4af57;opacity:.14"></div>
+      <div class="blob" style="width:330px;height:330px;bottom:-80px;left:-70px;background:#2b6ea6;opacity:.1"></div>
+      <div class="blob" style="width:200px;height:200px;top:48%;left:12%;background:#f5e6bf;opacity:.08"></div>
+    </div>
+    <div class="content text-center">
+      <img src="data:image/jpeg;base64,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" alt="CHEC Logo" class="reveal" style="max-width:350px;height:auto;display:block;margin:0 auto 1.35rem;animation:float 3.5s ease-in-out infinite;filter:drop-shadow(0 12px 20px rgba(0,0,0,.18));">
+      <div class="glass-card hero-box reveal">
+        <div class="dual-title">BRANCH OF CHINA HARBOUR ENGINEERING CO., LTD.</div>
+        <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,87,.35),transparent);margin:.55rem 0"></div>
+        <div class="dual-title" style="font-size:.92rem;">Infrastructure and Construction Works of Sedra Phase 3,4,5 and Warefa Single Family Units</div>
+      </div>
+      <div class="hero-main reveal">投诉引导手册</div>
+      <div class="hero-main reveal">Complaint Guidance Manual</div>
+      <div class="reveal" style="max-width:860px;margin:1.15rem auto 0;">
+        <div class="hero-note-cn">您的每一项诉求，我司将严肃核查、认真对待。</div>
+        <div class="hero-note-en">Every concern raised will be seriously reviewed and carefully investigated by our team.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-slide="2">
+    <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-60px;right:-40px;background:#d4af57;opacity:.1"></div><div class="blob" style="width:260px;height:260px;bottom:-50px;left:-30px;background:#2b6ea6;opacity:.08"></div></div>
+    <div class="content">
+      <div class="label reveal">PAGE 2</div>
+      <div class="title-cn reveal">投诉受理办公室</div>
+      <div class="title-en reveal">Complaint Reception Office</div>
+      <hr class="gold-rule reveal">
+      <div class="two-col">
+        <div class="glass-card info-block reveal" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div class="big-cn">办公室地点</div><div class="big-en">Office Location</div>
+            <div class="meta-cn" style="margin-top:.45rem;font-size:1.18rem;">CHEC SEDRA Phase 345 Site Office</div>
+            <div class="meta-en">Google Map: https://maps.app.goo.gl/yWzgYdWcSx6EkFAd8</div>
+            <div class="meta-cn" style="margin-top:.55rem;">投诉受理办公室：XXX</div><div class="meta-en">Complaint Reception Office: XXX</div>
+          </div>
+          <div style="margin-top:1rem;padding-top:.9rem;border-top:1px solid rgba(212,175,87,.14)">
+            <div class="big-cn">预约方式</div><div class="big-en">How to Appointment</div>
+            <div class="meta-cn" style="margin-top:.45rem;font-size:1.08rem;">优先选择电话预约上访时间</div>
+            <div class="meta-en">Phone appointment is preferred before any office visit.</div>
+            <div class="meta-cn" style="margin-top:.5rem;font-weight:600;color:#c7d5e2;">为避免安保导致的误会，建议先电话预约，再按预约时间到访。</div>
+            <div class="meta-en">To avoid misunderstanding caused by gate access control, visitors are advised to call first and arrive at the scheduled time.</div>
+          </div>
+          <div style="margin-top:1rem;padding-top:.9rem;border-top:1px solid rgba(212,175,87,.14)">
+            <div class="big-cn">投诉受理原则</div><div class="big-en">Where to Submit Complaints</div>
+            <div class="meta-cn" style="margin-top:.45rem;font-weight:700;color:#f3f7fb;">所有投诉均提交至 CHEC现场投诉受理办公室。</div>
+            <div class="meta-en">All complaints shall be submitted to the CHEC Site Office Complaint Reception Office.</div>
+          </div>
+        </div>
+        <!-- Right card: Contacts -->
+        <div class="glass-card info-block reveal">
+          <div class="big-cn">联系方式</div>
+          <div class="big-en">Contact by Language</div>
+          <div style="margin-top:.85rem;display:flex;flex-direction:column;gap:.7rem;">
+            <div class="mini-card">
+              <div class="meta-cn" style="font-size:1rem;">阿拉伯语</div>
+              <div class="meta-en">Arabic Contact</div>
+              <div class="meta-cn" style="margin-top:.4rem;color:#f5e6bf;">联系人：XXX</div>
+              <div class="big-en" style="margin-top:.3rem;color:#d4af57;">+966 – XX XXX XXXX</div>
+            </div>
+            <div class="mini-card">
+              <div class="meta-cn" style="font-size:1rem;">英文</div>
+              <div class="meta-en">English Contact</div>
+              <div class="meta-cn" style="margin-top:.4rem;color:#f5e6bf;">联系人：XXX</div>
+              <div class="big-en" style="margin-top:.3rem;color:#d4af57;">+966 – XX XXX XXXX</div>
+            </div>
+            <div class="mini-card">
+              <div class="meta-cn" style="font-size:1rem;">中文</div>
+              <div class="meta-en">Chinese Contact</div>
+              <div class="meta-cn" style="margin-top:.4rem;color:#f5e6bf;">联系人：XXX</div>
+              <div class="big-en" style="margin-top:.3rem;color:#d4af57;">+966 – XX XXX XXXX</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-slide="3">
+    <div class="gradient-mesh"><div class="blob" style="width:350px;height:350px;top:-70px;left:-60px;background:#2b6ea6;opacity:.1"></div><div class="blob" style="width:260px;height:260px;bottom:-50px;right:-40px;background:#d4af57;opacity:.08"></div></div>
+    <div class="content">
+      <div class="label reveal">PAGE 3</div>
+      <div class="title-cn reveal">投诉受理流程</div>
+      <div class="title-en reveal">Complaint Intake Process</div>
+      <hr class="gold-rule reveal">
+      <div class="two-col" style="align-items:start;">
+        <div class="glass-card info-block reveal" style="height:auto;min-height:0;display:flex;flex-direction:column;">
+          <div class="big-cn">提交什么资料？</div><div class="big-en">Required Documents</div>
+          <div style="display:flex;flex-direction:column;gap:.8rem;justify-content:center;flex:1;margin-top:.35rem;">
+            <div class="bullet"><span>✦</span><div><div class="meta-cn">ID</div><div class="meta-en">Valid ID of the complainant.</div></div></div>
+            <div class="bullet"><span>✦</span><div><div class="meta-cn">投诉事项说明</div><div class="meta-en">Description of the complaint matter.</div></div></div>
+            <div class="bullet"><span>✦</span><div><div class="meta-cn">双方合作关系证明（如合同、订单等）</div><div class="meta-en">Proof of contractual or cooperative relationship (e.g. contract, purchase order).</div></div></div>
+            <div class="bullet"><span>✦</span><div><div class="meta-cn">其他与争议相关的辅助材料（支付记录、工作记录、书面往来等）</div><div class="meta-en">Proof of contractual or cooperative relationship (e.g. contract, purchase order).</div></div></div>
+          </div>
+        </div>
+        <div class="glass-card info-block reveal" style="height:auto;min-height:0;display:flex;flex-direction:column;">
+          <div class="big-cn">核查时限</div><div class="big-en">Review Timeline</div>
+          <div class="timeline" style="margin-top:.35rem;">
+            <div class="time-row"><div class="time-key">即时|Immediate</div><div class="time-val">受理登记，并出具受理回执。<br>Immediate registration and issuance of receipt.</div></div>
+            <div class="time-row"><div class="time-key">48小时内 | Within 48 Hr</div><div class="time-val">完成初步核实，并通知相关分包商。<br>Initial verification completed and relevant subcontractor notified.</div></div>
+            <div class="time-row"><div class="time-key">7个工作日 | Within 7 Work days</div><div class="time-val">分包商提交书面回复及整改说明。<br>Subcontractor submits written response and rectification note.</div></div>
+            <div class="time-row"><div class="time-key">30个工作日 | Within 30 Work days</div><div class="time-val">完成整改、核实并闭合。<br>Rectification, review and closure to be completed.</div></div>
+            <div class="time-row"><div class="time-key" style="color:#f5e6bf">整改后5日内 | Within 5 days after closure</div><div class="time-val">向投诉人反馈书面处理结果。<br>Written result feedback to the complainant after rectification.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-slide="4">
+    <div class="gradient-mesh"><div class="blob" style="width:380px;height:380px;top:-70px;right:-50px;background:#22c55e;opacity:.08"></div><div class="blob" style="width:280px;height:280px;bottom:-50px;left:-40px;background:#ef4444;opacity:.08"></div></div>
+    <div class="content">
+      <div class="label reveal">PAGE 4</div>
+      <div class="title-cn reveal">核查结果与处理措施</div>
+      <div class="title-en reveal">Outcome After Review</div>
+      <hr class="gold-rule reveal">
+      <div class="two-col">
+        <div class="result-good reveal">
+          <div class="big-cn">核查属实：发出《履约敦促函》</div>
+          <div class="big-en">Verified: Issue a Performance Reminder Letter</div>
+          <div style="margin-top:.7rem;display:flex;flex-direction:column;gap:.7rem;">
+            <div class="meta-cn">向相关分包商正式发出《履约敦促函》。</div>
+            <div class="meta-en">A formal Performance Reminder Letter will be issued to the relevant subcontractor.</div>
+            <div class="meta-cn">要求在规定期限内提交回复、完成整改并接受后续核查。</div>
+            <div class="meta-en">The subcontractor must respond, complete rectification and accept follow-up review within the required period.</div>
+            <div class="meta-cn">整改完成并核实后，以书面方式告知投诉人处理结论。</div>
+            <div class="meta-en">After rectification and verification, the complainant will receive written feedback.</div>
+          </div>
+        </div>
+        <div class="result-bad reveal">
+          <div class="big-cn">核查不成立：发出《不予受理告知书》</div>
+          <div class="big-en">Not Verified: Issue a Notice of Non‑Acceptance of Complaint</div>
+          <div style="margin-top:.7rem;display:flex;flex-direction:column;gap:.7rem;">
+            <div class="meta-cn">书面说明不予受理或证据不足的原因。</div>
+            <div class="meta-en">Written explanation will be given for non-acceptance or insufficient evidence.</div>
+            <div class="meta-cn">如投诉人提供新的补充证据，我司将重新启动核查程序。</div>
+            <div class="meta-en">If new supporting evidence is provided, the review process may be reopened.</div>
+            <div class="meta-cn">如对调查结果不接受，建议依据相关合同约定寻求法律途径解决。</div>
+            <div class="meta-en">If the investigation result is not accepted, the parties are advised to seek legal remedies in accordance with the relevant contract.</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass-card reveal" style="margin-top:.85rem;padding:.9rem 1rem;">
+        <div class="meta-cn"><span style="color:#d4af57;font-weight:900;">重要提示：</span>CHEC受理投诉并不意味着对争议事实或付款责任作出预先承认。</div>
+        <div class="meta-en">Important Notice: Acceptance of a complaint by CHEC does not constitute any prior admission of facts in dispute or payment liability.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" data-slide="5">
+    <div class="gradient-mesh"><div class="blob" style="width:460px;height:460px;top:-90px;right:-80px;background:#d4af57;opacity:.12"></div><div class="blob" style="width:300px;height:300px;bottom:-60px;left:-40px;background:#2b6ea6;opacity:.08"></div><div class="blob" style="width:180px;height:180px;top:42%;left:30%;background:#f5e6bf;opacity:.06"></div></div>
+    <div class="content">
+      <div class="label reveal">PAGE 5</div>
+      <div class="title-cn reveal">CHEC合规立场声明与免责申明</div>
+      <div class="title-en reveal">CHEC Compliance Statement & Disclaimer</div>
+      <hr class="gold-rule reveal">
+      <div class="two-col" style="margin-bottom:.85rem;">
+        <div class="glass-card info-block reveal">
+          <div class="big-cn">CHEC合规立场</div><div class="big-en">CHEC Compliance Position</div>
+          <div style="display:flex;flex-direction:column;gap:.7rem;margin-top:.65rem;">
+            <div><div class="meta-cn">零容忍欠薪——一经核实，立即启动合同约束和管理程序。</div><div class="meta-en">Zero tolerance for wage arrears—once verified, contractual controls and management procedures will be activated immediately.</div></div>
+            <div><div class="meta-cn">替换与退场机制——对反复违规或管理失控的分包商保留替换权。</div><div class="meta-en">Replacement and removal mechanism—CHEC reserves the right to replace subcontractors with repeated violations or management failure.</div></div>
+            <div><div class="meta-cn">投诉透明处理——全程留档、结果可核查、流程可追溯。</div><div class="meta-en">Transparent complaint handling—full record keeping, reviewable outcome and traceable process.</div></div>
+          </div>
+        </div>
+        <div class="reveal" style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22);border-radius:18px;padding:1.08rem 1.15rem;">
+          <div class="big-cn">声明</div><div class="big-en">Statement</div>
+          <div class="big-cn" style="margin-top:.55rem;font-size:1.08rem;">本手册任何内容均不构成相应付款承诺。在符合沙特法律和主管部门要求的前提下，CHEC 将在其合理权限范围内督促分包商依法履行用工与支付义务，CHEC仅作为敦促履约的协助方。</div>
+          <div class="big-en" style="font-size:.86rem;">The provisions of this Manual shall not constitute any commitment to make payment. Subject to compliance with Saudi laws and the requirements of the competent authorities, CHEC will, within the scope of its reasonable authority, urge subcontractors to fulfill their employment and payment obligations in accordance with the law, and CHEC acts only as a facilitating party urging such performance.</div>
+        </div>
+      </div>
+      <div class="glass-card info-block reveal">
+        <div class="big-cn">免责申明</div><div class="big-en">Disclaimer</div>
+        <div class="small-grid" style="margin-top:.55rem;">
+          <div class="foot-mini"><span style="color:#d4af57;font-weight:900;">①</span><span>本手册为项目管理与合规指引，不构成对任何合同权利义务的变更，亦不扩大 CHEC 的合同责任范围。<br>This Manual is a project management and compliance guideline only; it does not amend any contractual rights or obligations or extend CHEC's contractual liability.</span></div>
+          <div class="foot-mini"><span style="color:#d4af57;font-weight:900;">②</span><span>投诉受理及处理行为不构成 CHEC 对任何争议事实、责任归属或付款义务成立的认可或承认。<br>The acceptance and handling of a complaint do not constitute CHEC's acknowledgment or admission of any disputed facts, liability, or payment obligations.</span></div>
+        </div>
+      </div>
+      <div class="reveal" style="text-align:center;margin-top:.78rem;color:#7c95aa;font-size:.73rem;letter-spacing:.12em;">BRANCH OF CHINA HARBOUR ENGINEERING CO., LTD. </div>
+    </div>
+  </div>
+</div>
+<div class="nav-controls"><button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" onclick="changeSlide(1)">&#8250;</button><span class="slide-counter" id="counter">1 / 5</span></div>
+<script>
+let current=1;const total=document.querySelectorAll('.slide').length;const dotsContainer=document.getElementById('dots');const counter=document.getElementById('counter');for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot)}function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector(`.slide[data-slide="${n}"]`);if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next)}current=n;updateNav()}function changeSlide(dir){let n=current+dir;if(n<1)n=total;if(n>total)n=1;goToSlide(n)}function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total}document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let touchStartX=0;document.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX});document.addEventListener('touchend',(e)=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1)});function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(18px)';el.offsetHeight;const delay=i*0.07;el.style.transition=`opacity .4s ease ${delay}s, transform .4s ease ${delay}s`;el.style.opacity='1';el.style.transform='translateY(0)'})}document.addEventListener('mousemove',(e)=>{const s=document.querySelector('.mouse-spotlight');if(s)s.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(212,175,87,.05), transparent 40%)`});animateSlide(document.querySelector('.slide.active'));
+</script>
+</body>
+</html>
